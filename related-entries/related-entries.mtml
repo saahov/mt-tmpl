@@ -1,0 +1,23 @@
+<mt:EntryTags><mt:TagName setvar="thetag"/><mt:Var name="tags{$thetag}" value="1"/></mt:EntryTags>
+<mt:SetVarBlock name="searchoptions"><mt:EntryTags glue=" OR "><mt:TagName/></mt:EntryTags></mt:SetVarBlock>
+
+<mt:If name="searchoptions">
+    <h1>Related entries:</h1>
+    <mt:EntryID setvar="thisentryid"/>
+    <mt:Entries tags="$searchoptions">
+        <mt:Unless tag="entryid" eq="$thisentryid">
+            <mt:Var name="matches" value="0"/>
+            <mt:EntryTags>
+                <mt:TagName setvar="thetag"><mt:If name="tags{$thetag}"><mt:Var name="matches" op="+" value="1" setvar="matches"/></mt:If>
+            </mt:EntryTags>
+            <mt:SetVarBlock name="theentry">
+                ...
+            </mt:SetVarBlock>
+            <mt:Var name="allentries{$theentry}" value="$matches"/>
+        </mt:Unless>
+    </mt:Entries>
+
+    <mt:Loop name="allentries" sort_by="value numeric reverse">
+        <mt:Unless name="__counter__" gt="5"><mt:Var name="__key__"/></mt:Unless>
+    </mt:Loop>
+</mt:if>
