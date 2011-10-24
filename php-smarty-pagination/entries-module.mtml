@@ -1,0 +1,17 @@
+<!-- Display Entries -->
+<mt:Entries limit="10" offset="`$smarty.request.offset*10`">
+    <mt:Include module="Entry Summary"/>
+</mt:Entries>
+
+<!-- Display pagination -->
+<div class="pagination">
+    {{capture assign="count"}}<mt:BlogEntryCount/>{{/capture}}
+
+    {{if $smarty.request.offset*10 < $count-10}}
+	    &larr; <a href="<mt:BlogURL/>entries.php?page={{$smarty.request.offset+1}}" class="left">Prew</a>
+    {{/if}}
+
+    {{if $smarty.request.offset*7 > 0}}
+	    <a href="<mt:BlogURL/>entries.php?page={{math equation="max(x-1,0)" x=$smarty.request.offset}}" class="right">Next</a> &rarr;
+    {{/if}}
+</div>
