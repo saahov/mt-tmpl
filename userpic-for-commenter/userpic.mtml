@@ -1,0 +1,39 @@
+<div class="vcard author">
+    <div class="avatar">
+		<mt:SetVarBlock name="commentertype"><mt:CommenterAuthType/></mt:SetVarBlock>
+		<mt:If tag="CommenterUserpic">
+		    <mt:CommenterUserpicAsset><img src="<mt:AssetThumbnailURL width="32" height="32" square="1">" class="avatar-img photo" alt="<mt:CommentAuthor encode_html="1"/>"/></mt:CommenterUserpicAsset>
+		    <mt:Else>
+		        <mt:If name="commentertype" like="(OpenID|Facebook)">
+			        <mt:If name="commentertype" eq="OpenID">
+			            <img src="<?php
+			                $commenter_url = '<mt:CommenterURL/>';
+			                $url_parts = parse_url($commenter_url);
+			                $favicon_url = $url_parts['scheme'].'://'.$url_parts['host'].'/favicon.ico';
+			                echo $favicon_url;
+			                ?>" alt="<mt:CommentAuthor encode_html="1"/>" class="avatar-img photo"/>
+			        </mt:If>
+			        <mt:If name="commentertype" eq="Facebook">
+			            <fb:profile-pic uid="<mt:CommenterUsername/>" width="32" height="32" linked="true"><img src="<mt:StaticWebPath/>images/default-userpic-36.jpg" class="avatar-img photo"/></fb:profile-pic>
+			        </mt:If>
+			        <mt:Else>
+			            <img src="<mt:Gravatar rating="g" default="<mt:StaticWebPath/>images/default-userpic-36.jpg" size="32"/>" class="avatar-img photo" alt="<mt:CommentAuthor encode_html="1"/>"/>
+			     </mt:If>
+		</mt:If>
+	</div>
+	<span class="commenter fn">
+	    <mt:CommentAuthorLink/>
+	    <mt:If tag="CommentAuthorIdentity">
+	        <span class="comment-icon <mt:Var name="commentertype" lower_case="1"/>">
+	            <mt:If tag="CommenterURL">
+	                <a href="<mt:CommenterURL/>" class="commenter-icon url" title="<mt:CommenterAuthType/>"><img src="<mt:CommenterAuthIconURL/>" alt="<mt:CommentAuthor encode_html="1"/>" class="commenter-icon-img"/></a>
+	                <mt:Else name="commentertype" eq="Facebook">
+	                <a href="http://www.facebook.com/profile.php?id=<mt:CommenterUsername/>" class="commenter-icon url" title="<mt:CommenterAuthType/>"><img src="<mt:CommenterAuthIconURL/>" alt="<mt:CommentAuthor encode_html="1"/>" class="commenter-icon-img"/></a>
+	                <mt:Else>
+	                <img src="<mt:CommenterAuthIconURL/>" alt="<mt:CommentAuthor encode_html="1"/>" class="commenter-icon-img"/>
+	            </mt:If>
+	        </span>
+	    </mt:If>
+	</span>
+	<span class="comment-info"><span class="published" title="<mt:CommentDate format_name="iso8601"/>"><mt:CommentDate/></span> <a href="#comment-<mt:CommentID/>" title="Comment Permalink">#</a></span>
+</div>
