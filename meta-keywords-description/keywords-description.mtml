@@ -1,0 +1,5 @@
+<mt:ArchiveType setvar="pagetype"/>
+
+<meta name="keywords" content="<mt:If name="pagetype" eq="Individual"><mt:EntryTags glue=", "><mt:TagName encode_html="1"/></mt:EntryTags><mt:Else name="pagetype" eq="Page"><mt:PageTags glue=", "><mt:TagName encode_html="1"/></mt:PageTags><mt:Else><mt:Tags glue=", " top="20"><mt:TagName encode_html="1"/></mt:Tags></mt:If>"/>
+
+<meta name="description" content="<mt:If name="pagetype" eq="Individual"><mt:EntryBody words="30" encode_html="1"/><mt:Else name="pagetype" eq="Page"><mt:PageBody words="30" encode_html="1"/><mt:Else name="pagetype" eq="Category"><mt:CategoryDescription encode_html="1"/><mt:Else><mt:BlogDescription/></mt:If>"/>
