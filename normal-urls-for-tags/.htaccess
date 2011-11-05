@@ -1,0 +1,1 @@
+RewriteRule ^/tag/(.*)$ <mt:CGIRelativeURL/><mt:SearchScript/>?tag=$1&IncludeBlogs=<mt:BlogID/>
