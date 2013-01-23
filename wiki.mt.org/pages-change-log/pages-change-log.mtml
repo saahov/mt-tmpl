@@ -1,0 +1,31 @@
+<mt:HTTPContentType type="application/atom+xml"/>
+<?xml version="1.0" encoding="<mt:PublishCharset/>"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><mt:BlogName remove_html="1" encode_xml="1"/></title>
+    <link rel="alternate" type="text/html" href="<mt:BlogURL encode_xml="1"/>"/>
+    <link rel="self" type="application/atom+xml" href="<mt:Link template="Atom"/>"/>
+    <id>tag:<mt:BlogHost exclude_port="1" encode_xml="1"/>,<mt:TemplateCreatedOn format="%Y-%m-%d"/>:<mt:BlogRelativeURL encode_xml="1"/>/<mt:BlogID/></id>
+    <updated><mt:Pages lastn="1"><mt:PageModifiedDate utc="1" format="%Y-%m-%dT%H:%M:%SZ"/></mt:Pages></updated>
+    <mt:If tag="MTBlogDescription"><subtitle><mt:BlogDescription remove_html="1" encode_xml="1"/></subtitle></mt:If>
+    <generator uri="http://www.movabletype.org/"><mt:ProductName version="1"/></generator>
+
+    <mt:Pages lastn="15" sort_by="modified_on" sort_order="descend">
+        <mt:SetVarBlock name="created_date"><mt:PageDate utc="1" format="%Y-%m-%dT%H:%M:%SZ"/></mt:SetVarBlock>
+        <mt:SetVarBlock name="modified_date"><mt:PageModifiedDate utc="1" format="%Y-%m-%dT%H:%M:%SZ"/></mt:SetVarBlock>
+        <entry>
+            <title><mt:EntryTitle remove_html="1" encode_xml="1"/></title>
+            <link rel="alternate" type="text/html" href="<mt:EntryPermalink encode_xml="1"/>"/>
+            <id><mt:EntryAtomID/></id>
+            <published><mt:PageDate utc="1" format="%Y-%m-%dT%H:%M:%SZ"/></published>
+            <updated><mt:PageModifiedDate utc="1" format="%Y-%m-%dT%H:%M:%SZ"/></updated>
+            <summary><mt:PageTitle encode_xml="1" convert_breaks="0"/> was <mt:If name="created_date" eq="$modified_date">created<mt:else>modified</mt:If> on <mt:PageModifiedDate utc="1" format="%x at %X"/> by <mt:PageAuthorDisplayName encode_xml="1"/></summary>
+            <author>
+                <name><mt:PageAuthorDisplayName encode_xml="1"/></name>
+            </author>
+            <content type="html" xml:lang="<mt:BlogLanguage ietf="1"/>" xml:base="<mt:BlogURL encode_xml="1"/>">
+                <mt:PageExcerpt remove_html="1" encode_xml="1"/>
+                <a href="<mt:PagePermalink encode_xml="1"/>">Read full document</a>
+            </content>
+        </entry>
+    </mt:Pages>
+</feed>
